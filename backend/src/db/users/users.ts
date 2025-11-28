@@ -13,11 +13,23 @@ export const getUsersCount = (): Promise<number> =>
       (error, results) => {
         if (error) {
           reject(error);
+          return;
+        }
+        if (!results) {
+          reject(new Error("Failed to get user count"));
+          return;
         }
         resolve(results.count);
       }
     );
   });
+
+const formatAddress = (user: User): string => {
+  if (!user.street || !user.city || !user.state || !user.zipcode) {
+    return "";
+  }
+  return `${user.street}, ${user.state}, ${user.city}, ${user.zipcode}`;
+};
 
 export const getUsers = (
   pageNumber: number,
@@ -30,8 +42,14 @@ export const getUsers = (
       (error, results) => {
         if (error) {
           reject(error);
+          return;
         }
-        resolve(results);
+        // Format address for each user
+        const usersWithAddress = results.map((user) => ({
+          ...user,
+          address: formatAddress(user),
+        }));
+        resolve(usersWithAddress);
       }
     );
   });

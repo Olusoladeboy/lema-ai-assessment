@@ -2,6 +2,92 @@
 
 This full-stack assignment involves building a user management system where developers must extend a Node.js/SQLite backend for user and post operations, and create a React/TypeScript frontend that displays user data in a paginated table and allows for post management, all while following provided design specifications.
 
+## Live URLs
+
+- **Frontend**: [https://lema-ai-frontend.vercel.app/](https://lema-ai-frontend.vercel.app/)
+- **Backend**: [https://lema-ai-backend-production.up.railway.app/](https://lema-ai-backend-production.up.railway.app/)
+
+## Setup Instructions for Local Installation
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### How to Run the Backend
+
+1. Navigate to the backend directory:
+```bash
+cd backend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Build the TypeScript code:
+```bash
+npm run build
+```
+
+4. Start the backend server:
+```bash
+npm start
+```
+
+For development with auto-reload:
+```bash
+npm run dev
+```
+
+The backend server will run on `http://localhost:3001`.
+
+**Note**: The backend uses an SQLite database (`data.db`) that is already included in the project. No additional database setup is required.
+
+### How to Run the Frontend
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file (if not already present) with the backend URL:
+```bash
+echo "VITE_API_BASE_URL=http://localhost:3001" > .env
+```
+
+4. Start the development server:
+```bash
+npm run dev
+```
+
+The frontend application will be available at `http://localhost:5173` (or the next available port).
+
+### How to Run Tests
+
+#### Backend Tests
+```bash
+cd backend
+npm test
+```
+
+#### Frontend Tests
+```bash
+cd frontend
+npm test
+```
+
+For frontend tests with UI:
+```bash
+cd frontend
+npm run test:ui
+```
 
 ## Backend
 
@@ -105,7 +191,141 @@ You are required to implement the following backend functionalities:
 - At least one unit test demonstrating testing of a component or functionality.
 - Instructions on how to run the application locally, including setting up the backend and frontend.
 
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js (v18 or higher recommended)
+- npm or yarn
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+```bash
+cd backend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Build the TypeScript code:
+```bash
+npm run build
+```
+
+4. Start the backend server:
+```bash
+npm start
+```
+
+The backend server will run on `http://localhost:3001`.
+
+**Note**: The backend uses an SQLite database (`data.db`) that is already included in the project. No additional database setup is required.
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The frontend application will be available at `http://localhost:5173` (or the next available port).
+
+### Running Tests
+
+#### Backend Tests
+```bash
+cd backend
+npm test
+```
+
+#### Frontend Tests
+```bash
+cd frontend
+npm test
+```
+
+## Project Structure
+
+```
+.
+├── backend/          # Node.js/TypeScript backend
+│   ├── src/         # Source TypeScript files
+│   ├── dist/        # Compiled JavaScript files
+│   ├── data.db      # SQLite database
+│   └── package.json
+├── frontend/        # React/TypeScript frontend
+│   ├── src/         # Source files
+│   │   ├── api/     # API client
+│   │   ├── components/  # React components
+│   │   ├── hooks/   # Custom hooks
+│   │   ├── pages/   # Page components
+│   │   └── types/   # TypeScript types
+│   └── package.json
+└── README.md
+```
+
+## API Endpoints
+
+### Users
+- `GET /users?pageNumber={page}&pageSize={size}` - Get paginated users
+- `GET /users/count` - Get total user count
+
+### Posts
+- `GET /posts?userId={userId}` - Get posts for a user
+- `POST /posts` - Create a new post (requires: `title`, `body`, `userId`)
+- `DELETE /posts/{postId}` - Delete a post
+
+## Features Implemented
+
+### Backend
+- ✅ Address formatting and inclusion in user responses
+- ✅ Post deletion endpoint
+- ✅ Create new post endpoint with validation
+- ✅ Error handling and appropriate HTTP status codes
+
+### Frontend
+- ✅ Users table with pagination (4 users per page)
+- ✅ User details display (name, email, formatted address)
+- ✅ Address column with fixed width (392px) and text truncation
+- ✅ User posts page with user information
+- ✅ Post list display
+- ✅ Create new post functionality
+- ✅ Delete post with optimistic updates
+- ✅ Loading and error states
+- ✅ React Query for data fetching and caching
+- ✅ Responsive design with Tailwind CSS
+- ✅ Unit tests for API functions and components
+
+## Testing
+
+The project includes unit tests for both backend and frontend:
+
+- **Backend**: Tests for post deletion endpoint
+- **Frontend**: Tests for API functions and React components
+
+Run tests with:
+```bash
+# Backend
+cd backend && npm test
+
+# Frontend
+cd frontend && npm test
+```
+
 ## Submission Instructions
 
 - **Code Repository**: Provide access to your code via a Git repository (e.g., GitHub, GitLab).
-- **Readme File**: Include a `README.md` file with instructions on how to install dependencies, set up the database, run migrations (if any), and start both the backend and frontend servers.
+- **Readme File**: This README includes instructions on how to install dependencies, set up the database, and start both the backend and frontend servers.
